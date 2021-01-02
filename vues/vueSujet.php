@@ -46,7 +46,7 @@ if (isset($dVue))
             if(isset($_SESSION['role'])){
             ?>
                 <form method="post">
-                    <textarea name="sujet" placeholder="Contenu du sujet..."></textarea><br>
+                    <textarea name="article" placeholder="Contenu du sujet..."></textarea><br>
                     <input type="hidden" name="action" value="repondre">
                     <input type="hidden" name="topic" value="<?php echo $_REQUEST['topic'];?>">
                     <input type="submit" value="envoyer" />

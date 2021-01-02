@@ -1,0 +1,8 @@
+bouton retour.
+
+gerer qqchose dans inscription.
+
+afficher dates.
+
+-status admin :
+gerer les suppression de comm/articles + modif d'articles.

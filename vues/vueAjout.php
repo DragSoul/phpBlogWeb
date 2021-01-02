@@ -31,7 +31,7 @@ if (isset($dVue))
 		?>
 		<form method="post" id="newPost">
 			<br><input type="text" name="name" placeholder="Nom du sujet..." required/><br>
-			<textarea name="sujet" placeholder="Contenu du sujet..."></textarea><br>
+			<textarea name="article" placeholder="Contenu du sujet..."></textarea><br>
 			<input type="hidden" name="action" value="confirmeAjout">
 			<input type="submit" value="Ajouter le sujet" />
 			<?php 

@@ -2,7 +2,7 @@
 
 class Simplemodel{
 
-	function connexion($login, $password) : Membre
+	function connexion($login, $password)
 	{
 		$MembreGateway = new MembreGateway();
 		$login = Validation::sanitizeString($login);
@@ -26,6 +26,9 @@ class Simplemodel{
 		}
 	}
 
+
+	// à travailler : vérifier quand saisi carac interdit et permettre à l'user d'etre co direct et pas
+	//retaper ses id
 	function inscription($email, $login, $password){
 		$MembreGateway = new MembreGateway();
 		$login = Validation::sanitizeString($login);
@@ -36,8 +39,8 @@ class Simplemodel{
 	}
 
 	function afficheForum() : array{ //retourne les tâches dans un tableau
-		$postSG = new SujetGateway();
-		$tab = $postSG->SelectAll();
+		$articleGateway = new ArticleGateway();
+		$tab = $articleGateway->SelectAll();
 		return $tab;
 	}
 	
@@ -55,24 +58,24 @@ class Simplemodel{
 	}
 
 	function ajouterSujet($pseudo, $nom, $contenu){
-		$sujetGateway = new SujetGateway();
-		$postSujetGateway = new PostSujetGateway();
+		$articleGateway = new ArticleGateway();
+		$commentGateway = new CommentaireGateway();
 		$membreGateway = new MembreGateway();
 		Validation::sanitizeString($nom);
 		Validation::sanitizeString($contenu);
 		$id = $membreGateway->getId($pseudo);
-		$sujetGateway->ajout($nom, $id['id']);
-		$idSujet = $sujetGateway->getId($nom, $id['id']);
-		$postSujetGateway->ajout($id['id'], $contenu, $idSujet['id']);
+		$articleGateway->ajout($nom, $id['id']);
+		$idSujet = $articleGateway->getId($nom, $id['id']);
+		$commentGateway->ajout($id['id'], $contenu, $idSujet['id']);
 	}
 
 	function afficheSujet($topic){
-		$postSG = new PostSujetGateway();
-		$membreG = new MembreGateway();
-		$tab = $postSG->SelectAll($topic);
+		$commGateway = new CommentaireGateway();
+		$membreGateway = new MembreGateway();
+		$tab = $commGateway->SelectAll($topic);
 		$tab2 = [];
 		foreach($tab as $t){
-			$proprietaire = $membreG->getPseudo($t->auteur);
+			$proprietaire = $membreGateway->getPseudo($t->auteur);
 			$post = [$proprietaire[0], $t->contenu];
 			$tab2[] = $post;
 		}
@@ -80,16 +83,16 @@ class Simplemodel{
 	}
 
 	function repondre($pseudo, $nom, $desc){
-		$postSG = new PostSujetGateway();
+		$commGateway = new CommentaireGateway();
 		$membreGateway = new MembreGateway();
 		Validation::sanitizeString($desc);
 		$id = $membreGateway->getId($pseudo);
-		$postSG->ajout($id['id'], $desc, $nom);
+		$commGateway->ajout($id['id'], $desc, $nom);
 	}
 
 	function getNomSujet($id){
-		$SG = new SujetGateway();
-		return $SG->getNom($id);
+		$articleGateway = new ArticleGateway();
+		return $articleGateway->getNom($id);
 	}
 }
 ?> 

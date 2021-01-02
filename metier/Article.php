@@ -1,5 +1,5 @@
 <?php
-Class Sujet{
+Class Article{
 	public $id;
 	public $nom;
 	public $date;

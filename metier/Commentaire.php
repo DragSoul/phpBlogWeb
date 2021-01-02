@@ -1,5 +1,5 @@
 <?php
-Class PostSujet{
+Class Commentaire{
 
 		public $id;
 		public $auteur;

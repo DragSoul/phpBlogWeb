@@ -1,6 +1,6 @@
 <?php
 
-Class PostSujetGateway{
+Class CommentaireGateway{
 
 	private $con;
 
@@ -11,7 +11,7 @@ Class PostSujetGateway{
 
 	function SelectAll($topic) : array{
 		$tab = array();
-		$querry = 'SELECT * FROM commentaires WHERE idarticle=:topic';
+		$querry = 'SELECT * FROM commentaires WHERE idarticle=:topic ORDER BY date DESC';
 		$this->con->executeQuery($querry, array(':topic' => array($topic, PDO::PARAM_STR)));
 		$results=$this->con->getResults();
 		Foreach ($results as $row){
@@ -20,7 +20,7 @@ Class PostSujetGateway{
 			$contenu = $row['contenu'];
             $date = $row['date'];
             $idarticle = $row['idarticle'];
-            $t = new PostSujet($id, $auteur, $contenu, $date, $idarticle);
+            $t = new Commentaire($id, $auteur, $contenu, $date, $idarticle);
             $tab[] = $t;
         }
         return $tab;

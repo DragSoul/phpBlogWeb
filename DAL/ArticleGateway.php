@@ -1,6 +1,6 @@
 <?php
 
-Class SujetGateway{
+Class ArticleGateway{
 
 	private $con;
 
@@ -19,7 +19,7 @@ Class SujetGateway{
 					$nom = $row['nom'];
 					$date = $row['date'];
 					$auteur = $row['auteur'];
-                    $t = new Sujet($id, $nom, $date, $auteur);
+                    $t = new Article($id, $nom, $date, $auteur);
                     $tab[] = $t;
         }
         return $tab;

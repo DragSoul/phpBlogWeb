@@ -29,7 +29,7 @@ class CtrlMembre {
 					break;
 
 				default:
-					$dVueEreur[] = "Erreur dans le switch de la vueP";
+					$dVueEreur[] = "Erreur dans le switch de la vueP (Membre)";
 					require	 ($rep.$vues['erreur']);
 					break;
 			}
@@ -78,7 +78,7 @@ class CtrlMembre {
 		global $rep,$vues;
 		$pseudo = $_SESSION['login'];
 		$nom=$_POST['name'];
-		$desc=$_POST['sujet'];
+		$desc=$_POST['article'];
 		$model = new Simplemodel();
 		$model->ajouterSujet($pseudo, $nom, $desc);
 		$this->afficheForum();
@@ -88,7 +88,7 @@ class CtrlMembre {
 		global $rep,$vues;
 		$pseudo = $_SESSION['login'];
 		$nom = $topic;
-		$desc = $_POST['sujet'];
+		$desc = $_POST['article'];
 		$model = new Simplemodel();
 		$model->repondre($pseudo, $nom, $desc);
 		$dVue = array (

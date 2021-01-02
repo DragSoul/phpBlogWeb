@@ -26,7 +26,11 @@ if (isset($dVue))
 	<h2>Personne - formulaire</h2>
 	<hr>
 
-
+	<?php 
+	if($_REQUEST['action'] == 'validationFormulaireCo'){
+		echo 'Pseudo ou mot de passe incorrecte.';
+	} 
+	?>
 	<form method="post" name="myform" id = "myform">
 		<table>
 			<tr>

@@ -37,7 +37,7 @@ class CtrlUser {
 					break;
 
 				default:
-					$dVueEreur[] = "Erreur dans le switch de la vueP";
+					$dVueEreur[] = "Erreur dans le switch de la vueP (User)";
 					require ($rep.$vues['erreur']);
 					break;
 			}
