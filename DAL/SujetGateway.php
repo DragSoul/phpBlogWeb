@@ -11,22 +11,40 @@ Class SujetGateway{
 
 	function SelectAll() : array{
 		$tab = array();
-		$querry = 'SELECT * FROM sujet';
-		$this->con->executeQuery($querry, array());
+		$query = 'SELECT * FROM articles';
+		$this->con->executeQuery($query, array());
 		$results=$this->con->getResults();
 		Foreach ($results as $row){
 					$id = $row['id'];
-					$name = $row['name'];
-                    $t = new Sujet($id, $name);
+					$nom = $row['nom'];
+					$date = $row['date'];
+					$auteur = $row['auteur'];
+                    $t = new Sujet($id, $nom, $date, $auteur);
                     $tab[] = $t;
         }
         return $tab;
 	}
 
-	function ajout($name){
-		$query = "INSERT INTO sujet(name) VALUES(:name)";
+	function ajout($nom, $auteur){
+		$query = "INSERT INTO articles(nom, auteur) VALUES(:nom, :auteur)";
 		$this->con->executequery($query, array(
-				':name' => array($name, PDO::PARAM_STR)));
+				':nom' => array($nom, PDO::PARAM_STR),
+				':auteur' => array($auteur, PDO::PARAM_STR)));
+	}
+
+	function getId($nom, $id){
+		$query = 'SELECT id FROM articles WHERE nom=:nom AND auteur=:auteur';
+		$this->con->executequery($query, array(
+			':nom' => array($nom, PDO::PARAM_STR),
+			':auteur' => array($id, PDO::PARAM_STR)));
+		return $this->con->getResults()[0];
+	}
+
+	function getNom($id){
+		$query = 'SELECT nom FROM articles WHERE id=:id';
+		$this->con->executequery($query, array(
+			':id' => array($id, PDO::PARAM_STR)));
+		return $this->con->getResults()[0];
 	}
 }
 

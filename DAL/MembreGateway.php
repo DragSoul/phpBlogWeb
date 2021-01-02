@@ -12,7 +12,7 @@ Class MembreGateway{
 		$query = "SELECT * FROM membres WHERE pseudo = :pseudo";
 		$this->con->executequery($query, array(':pseudo' => array($login, PDO::PARAM_STR)));
 		$result = $this->con->getResults();
-		return new Membre($result['0']['pseudo'], $result['0']['email'], $result['0']['mdp']);
+		return new Membre($result['0']['id'], $result['0']['pseudo'], $result['0']['email'], $result['0']['mdp'], $result['0']['isbanned'], $result['0']['isadmin']);
 	}
 
 	public function newMembre($email, $login, $mdp){

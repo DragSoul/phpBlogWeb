@@ -37,6 +37,7 @@ class CtrlMembre {
 		catch (PDOException $e)
 		{
 			$dVueEreur[] =	"Erreur inattendue!!! (PDO) ";
+			echo $e;
 			require ($rep.$vues['erreur']);
 		}
 		catch (Exception $e2)
@@ -90,7 +91,12 @@ class CtrlMembre {
 		$desc = $_POST['sujet'];
 		$model = new Simplemodel();
 		$model->repondre($pseudo, $nom, $desc);
-		$dVue = $model->afficheSujet($topic);
+		$dVue = array (
+			'article' => "",
+			'rep' => "",
+			);
+		$dVue['article'] = $model->getNomSujet($topic);
+		$dVue['rep'] = $model->afficheSujet($topic);
 		require_once($rep.$vues['vueSujet']);
 	}
 

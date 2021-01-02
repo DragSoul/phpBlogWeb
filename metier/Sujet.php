@@ -1,11 +1,15 @@
 <?php
 Class Sujet{
 	public $id;
-	public $name;
+	public $nom;
+	public $date;
+	public $auteur;
 
- 	public function __construct($id, $name){
+ 	public function __construct($id, $nom, $date, $auteur){
 		$this->id = $id;
- 		$this->name = $name;
+		$this->nom = $nom;
+		$this->date = $date;
+		$this->auteur = $auteur;
  	}
 }
 

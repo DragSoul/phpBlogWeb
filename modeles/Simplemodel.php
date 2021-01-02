@@ -9,7 +9,15 @@ class Simplemodel{
 		$password = Validation::sanitizeString($password);
 		$userCo = $MembreGateway->loginValide($login);
 		if($userCo != null && password_verify($password, $userCo->getmdp())){
-			$_SESSION['role'] = "membre";
+			if($userCo->isadmin == 1){
+				$_SESSION['role'] = "admin";
+			}
+			elseif($userCo->isbanned == 1){
+				$_SESSION['role'] = "banned";
+			}
+			else{
+				$_SESSION['role'] = "membre";
+			}
 			$_SESSION['login'] = $userCo->pseudo;
 			return $userCo;
 		}
@@ -39,30 +47,32 @@ class Simplemodel{
 		if(isset($_SESSION['login']) && isset($_SESSION['role'])){
 			$login = Validation::sanitizeString($_SESSION['login']);
 			$role = Validation::sanitizeString($_SESSION['role']);
-			return new Membre($_SESSION['login'], null, null);
+			return new Membre(null, $_SESSION['login'], null, null, null, null);
 		}
 		else{
 			return null;
 		}
 	}
 
-	function ajouterSujet($pseudo, $nom, $desc){
+	function ajouterSujet($pseudo, $nom, $contenu){
 		$sujetGateway = new SujetGateway();
 		$postSujetGateway = new PostSujetGateway();
 		$membreGateway = new MembreGateway();
 		Validation::sanitizeString($nom);
-		Validation::sanitizeString($desc);
+		Validation::sanitizeString($contenu);
 		$id = $membreGateway->getId($pseudo);
-		$sujetGateway->ajout($nom);
-		$postSujetGateway->ajout($id['id'], $desc, $nom);
+		$sujetGateway->ajout($nom, $id['id']);
+		$idSujet = $sujetGateway->getId($nom, $id['id']);
+		$postSujetGateway->ajout($id['id'], $contenu, $idSujet['id']);
 	}
 
-	function afficheSujet($topic){//le faire avec l'id nan ?
+	function afficheSujet($topic){
 		$postSG = new PostSujetGateway();
 		$membreG = new MembreGateway();
 		$tab = $postSG->SelectAll($topic);
+		$tab2 = [];
 		foreach($tab as $t){
-			$proprietaire = $membreG->getPseudo($t->propri);
+			$proprietaire = $membreG->getPseudo($t->auteur);
 			$post = [$proprietaire[0], $t->contenu];
 			$tab2[] = $post;
 		}
@@ -75,6 +85,11 @@ class Simplemodel{
 		Validation::sanitizeString($desc);
 		$id = $membreGateway->getId($pseudo);
 		$postSG->ajout($id['id'], $desc, $nom);
+	}
+
+	function getNomSujet($id){
+		$SG = new SujetGateway();
+		return $SG->getNom($id);
 	}
 }
 ?> 

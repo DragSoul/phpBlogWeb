@@ -11,26 +11,27 @@ Class PostSujetGateway{
 
 	function SelectAll($topic) : array{
 		$tab = array();
-		$querry = 'SELECT * FROM postsujet WHERE sujet=:topic';
+		$querry = 'SELECT * FROM commentaires WHERE idarticle=:topic';
 		$this->con->executeQuery($querry, array(':topic' => array($topic, PDO::PARAM_STR)));
 		$results=$this->con->getResults();
 		Foreach ($results as $row){
-			$propri = $row['propri'];
+			$id = $row['id'];
+			$auteur = $row['auteur'];
 			$contenu = $row['contenu'];
             $date = $row['date'];
-            $sujet = $row['sujet'];
-            $t = new PostSujet($propri, $contenu, $date, $sujet);
+            $idarticle = $row['idarticle'];
+            $t = new PostSujet($id, $auteur, $contenu, $date, $idarticle);
             $tab[] = $t;
         }
         return $tab;
 	}
 
-	function ajout($propri, $contenu, $sujet){
-		$query = "INSERT INTO postsujet(propri,contenu,sujet) VALUES(:propri, :contenu, :sujet)";
+	function ajout($auteur, $contenu, $idarticle){
+		$query = "INSERT INTO commentaires(auteur,contenu,idarticle) VALUES(:auteur, :contenu, :idarticle)";
 		$this->con->executequery($query, array(
-				':propri' => array($propri, PDO::PARAM_STR),
+				':auteur' => array($auteur, PDO::PARAM_STR),
 				':contenu' => array($contenu, PDO::PARAM_STR), 
-				':sujet' => array($sujet, PDO::PARAM_STR)));
+				':idarticle' => array($idarticle, PDO::PARAM_STR)));
 	}
 }
 

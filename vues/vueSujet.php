@@ -11,7 +11,7 @@
 <?php
 if (isset($dVue))
 {?>
- <h1><?php echo $_REQUEST['topic'];?></h1> <!-- afficher le nom du sujet (le recup donc...)-->
+ <h1><?php echo $dVue['article'][0];?></h1> <!-- afficher le nom du sujet (le recup donc...)-->
     <div id="Cforum">
     <?php
         if(isset($_SESSION['role'])){
@@ -34,7 +34,7 @@ if (isset($dVue))
             </form>
         <?php
         }
-        foreach($dVue as $v){
+        foreach($dVue['rep'] as $v){
             ?>
             <div class="post">
                 <h3><?php echo $v[0];?></h3>

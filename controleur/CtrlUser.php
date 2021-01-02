@@ -110,11 +110,15 @@ class CtrlUser {
 
 	}
 
-	function afficheSujet($topic){//faut le sujet
+	function afficheSujet($topic){
 		global $rep,$vues;
 		$m = new Simplemodel();
-		$dVue = $m->afficheSujet($topic);
-		
+		$dVue = array (
+			'article' => "",
+			'rep' => "",
+			);
+		$dVue['article'] = $m->getNomSujet($topic);
+		$dVue['rep'] = $m->afficheSujet($topic);		
 		require_once($rep.$vues['vueSujet']);
 	}
 }

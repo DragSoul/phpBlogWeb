@@ -36,14 +36,15 @@
         ?>
         <div class="categories">
             <form method="post" id = "ajoutT">
-                <td><input class="topic" name="topic" type="submit" value="<?php echo $v->name; ?>"></td>
+                <td><input name="article" type="submit" value="<?php echo $v->nom; ?>"></td>
+                <input name="topic" type="hidden" value="<?php echo $v->id; ?>">
                 <input type="hidden" name="action" value="afficheSujet">
                 
             </form>
         </div>
     <?php 
     }
-        if(isset($_SESSION['role'])){
+        if(isset($_SESSION['role']) && $_SESSION['role'] == 'admin'){
         ?>
 
             <form method="post" id = "ajoutT">

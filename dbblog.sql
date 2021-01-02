@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : lun. 28 déc. 2020 à 11:33
+-- Généré le : sam. 02 jan. 2021 à 13:25
 -- Version du serveur :  5.7.31
 -- Version de PHP : 7.3.21
 
@@ -24,6 +24,53 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `articles`
+--
+
+DROP TABLE IF EXISTS `articles`;
+CREATE TABLE IF NOT EXISTS `articles` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nom` varchar(60) NOT NULL,
+  `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `auteur` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `articles`
+--
+
+INSERT INTO `articles` (`id`, `nom`, `date`, `auteur`) VALUES
+(1, 'overwatch', '2020-12-30 16:55:44', 1),
+(12, 'Re:Zero', '2021-01-02 14:07:11', 2);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `commentaires`
+--
+
+DROP TABLE IF EXISTS `commentaires`;
+CREATE TABLE IF NOT EXISTS `commentaires` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `auteur` int(11) NOT NULL,
+  `contenu` text NOT NULL,
+  `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `idarticle` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `commentaires`
+--
+
+INSERT INTO `commentaires` (`id`, `auteur`, `contenu`, `date`, `idarticle`) VALUES
+(1, 1, 'bonjour', '2020-12-30 16:59:34', 1),
+(18, 2, 'bon c\'est pour continuer les tests hein ?', '2021-01-02 14:07:11', 12);
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `membres`
 --
 
@@ -32,61 +79,19 @@ CREATE TABLE IF NOT EXISTS `membres` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `pseudo` varchar(21) NOT NULL,
   `email` varchar(60) NOT NULL,
-  `mdp` varchar(200) NOT NULL,
+  `mdp` varchar(255) NOT NULL,
+  `isbanned` tinyint(1) NOT NULL DEFAULT '0',
+  `isadmin` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `membres`
 --
 
-INSERT INTO `membres` (`id`, `pseudo`, `email`, `mdp`) VALUES
-(5, 'DragSoul', 'dragsoul@live.fr', '$2y$10$2XMBtqLv7rEWBe7W2wuGG.N/.FMlCDXjxDffqgia5F0B3e7WyyUsS'),
-(4, 'toto', 'toto@toto.com', '$2y$10$xpMXSch7s4q/51aUEMf2R.0NencuPZjKH07u9VEHCXrLx/u/sSUM.');
-
--- --------------------------------------------------------
-
---
--- Structure de la table `postsujet`
---
-
-DROP TABLE IF EXISTS `postsujet`;
-CREATE TABLE IF NOT EXISTS `postsujet` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `propri` int(11) NOT NULL,
-  `contenu` text NOT NULL,
-  `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `sujet` varchar(60) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=22 DEFAULT CHARSET=latin1;
-
---
--- Déchargement des données de la table `postsujet`
---
-
-INSERT INTO `postsujet` (`id`, `propri`, `contenu`, `date`, `sujet`) VALUES
-(21, 5, 'on va dire que toto c\'est notre compte \"test\".\r\nD\'ailleurs si tu veux test :\r\npseudo : toto\r\nmdp : toto', '2020-12-28 12:31:39', 'Overwatch'),
-(20, 4, 'Quel est ton perso prÃ©fÃ©rÃ© (Ã  jouer je veux dire).\r\nPour moi, c\'est Ana !', '2020-12-28 12:29:41', 'Overwatch');
-
--- --------------------------------------------------------
-
---
--- Structure de la table `sujet`
---
-
-DROP TABLE IF EXISTS `sujet`;
-CREATE TABLE IF NOT EXISTS `sujet` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(60) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
-
---
--- Déchargement des données de la table `sujet`
---
-
-INSERT INTO `sujet` (`id`, `name`) VALUES
-(16, 'Overwatch');
+INSERT INTO `membres` (`id`, `pseudo`, `email`, `mdp`, `isbanned`, `isadmin`) VALUES
+(1, 'toto', 'toto@toto.com', '$2y$10$Bnb3Sr.yGCPrejypSHoCEuVUEWnD0VjZwYL4yhj.T3HbaqvRhVVpe', 0, 1),
+(2, 'DragSoul', 'dragsoul@live.fr', '$2y$10$4IHi/2.UzB4X4XpOHaue0ewkjPpvWYJ4Me6pwukpSwwFywBtrLweO', 0, 0);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

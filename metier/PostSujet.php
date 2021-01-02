@@ -1,16 +1,18 @@
 <?php
 Class PostSujet{
 
-		public $propri;
+		public $id;
+		public $auteur;
  		public $contenu;
 		public $date;
-		public $sujet;
+		public $idarticle;
 
- 		public function __construct($propri, $contenu, $date, $sujet){
- 			$this->propri = $propri;
+ 		public function __construct($id, $auteur, $contenu, $date, $idarticle){
+			$this->id = $id;
+			$this->auteur = $auteur;
  			$this->contenu = $contenu;
 			$this->date = $date;
-			$this->sujet = $sujet;
+			$this->idarticle = $idarticle;
  		}
 }
 
