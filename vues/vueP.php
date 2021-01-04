@@ -39,8 +39,19 @@
                 <td><input name="article" type="submit" value="<?php echo $v->nom; ?>"></td>
                 <input name="topic" type="hidden" value="<?php echo $v->id; ?>">
                 <input type="hidden" name="action" value="afficheSujet">
-                
             </form>
+
+        <?php
+        if(isset($_SESSION['role']) && $_SESSION['role'] == 'admin'){
+        ?>
+            <form method="post" id = "suppr">
+                <td><input name="supprArticle" type="submit" value="supprimer"></td>
+                <input name="topic" type="hidden" value="<?php echo $v->id; ?>">
+                <input type="hidden" name="action" value="supprArticle">
+            </form>
+        <?php
+        }
+        ?>
         </div>
     <?php 
     }
@@ -49,7 +60,7 @@
 
             <form method="post" id = "ajoutT">
                 <td><input type="submit" value="nouveau"></td>
-                <input type="hidden" name="action" value="ajoutSujet">
+                <input type="hidden" name="action" value="ajoutArticle">
             </form>
 
         <?php

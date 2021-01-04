@@ -1,6 +1,6 @@
 bouton retour.
 
-gerer qqchose dans inscription.
+gerer des choses dans inscription.
 
 afficher dates.
 

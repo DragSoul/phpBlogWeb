@@ -33,6 +33,12 @@ Class CommentaireGateway{
 				':contenu' => array($contenu, PDO::PARAM_STR), 
 				':idarticle' => array($idarticle, PDO::PARAM_STR)));
 	}
+
+	function supprAllComm($idSujet){
+		$query = "DELETE FROM commentaires WHERE idarticle=:idSujet";
+		$this->con->executequery($query, array(
+				':idSujet' => array($idSujet, PDO::PARAM_STR)));
+	}
 }
 
 ?>

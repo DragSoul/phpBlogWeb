@@ -12,14 +12,6 @@ class CtrlMembre {
 					$this->afficheForum();
 					break;
 
-				case "ajoutSujet" :
-					$this->ajoutSujet();
-					break;
-
-				case "confirmeAjout" :
-					$this->confirmeAjout();
-					break;
-
 				case "deconnexion" : 
 					$this->deconnexion();
 					break;
@@ -59,28 +51,6 @@ class CtrlMembre {
 		session_unset();
 		session_destroy();
 		$_Session = array();
-		$this->afficheForum();
-	}
-
-
-	//ici !
-	function ajoutSujet(){
-		global $rep, $vues;
-		$dVue = array (
-				'nom' => "",
-				'desc' => "",
-				'date' => "",
-				);
-		require_once($rep.$vues['vueAjout']);
-	}
-
-	function confirmeAjout(){
-		global $rep,$vues;
-		$pseudo = $_SESSION['login'];
-		$nom=$_POST['name'];
-		$desc=$_POST['article'];
-		$model = new Simplemodel();
-		$model->ajouterSujet($pseudo, $nom, $desc);
 		$this->afficheForum();
 	}
 

@@ -11,7 +11,8 @@
 <?php
 if (isset($dVue))
 {?>
- <h1><?php echo $dVue['article'][0];?></h1> <!-- afficher le nom du sujet (le recup donc...)-->
+<a href="vueP.php">retour</a> <!--                      RETOUR                            -->
+ <h1><?php echo $dVue['article'][0];?></h1>
     <div id="Cforum">
     <?php
         if(isset($_SESSION['role'])){

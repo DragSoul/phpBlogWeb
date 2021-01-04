@@ -9,7 +9,7 @@ class Validation {
         }
     }
 
-    static function val_formCo(string &$nom, string &$age, array &$dVueEreur) {
+    static function val_formCo(string &$nom, array &$dVueEreur) {
 
         if (!isset($nom)||$nom=="") {
             $dVueEreur[] = "pas de nom";
@@ -31,9 +31,7 @@ class Validation {
             $email="";
         }
 
-        $email_san = filter_var($email, FILTER_SANITIZE_EMAIL);
-        if (!filter_var($email_san, FILTER_VALIDATE_EMAIL))
-        {
+        if($email !== filter_var($email, FILTER_SANITIZE_EMAIL) || !filter_var($email, FILTER_VALIDATE_EMAIL)){
             $dVueEreur[] = "email invalide";
             $email="";
         }

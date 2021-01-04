@@ -85,7 +85,7 @@ class CtrlUser {
 		global $rep,$vues;
 		$login=$_POST['txtLogin'];
 		$password=$_POST['txtPassword'];
-		Validation::val_formCo($login,$password,$dVueEreur);
+		Validation::val_formCo($login,$dVueEreur);
 
 		$model = new Simplemodel();
 		$data=$model->connexion($login, $password);
@@ -97,12 +97,16 @@ class CtrlUser {
 		}
 	}
 
+	//gerer les erreurs de formulaire...
 	function inscription(array $dVueEreur){
 		global $rep,$vues;
 		$email = $_POST['txtEmail'];
 		$login=$_POST['txtLogin'];
 		$password=$_POST['txtPassword'];
 		Validation::val_formIn($email,$login,$password,$dVueEreur);
+		if(isset($dVueEreur)){
+			require_once($rep.$vues['erreur']);
+		}
 
 		$model = new Simplemodel();
 		$data = $model->inscription($email, $login, $password);

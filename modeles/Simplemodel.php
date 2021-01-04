@@ -94,5 +94,12 @@ class Simplemodel{
 		$articleGateway = new ArticleGateway();
 		return $articleGateway->getNom($id);
 	}
+
+	function supprArticle($idSujet){
+		$articleGateway = new ArticleGateway();
+		$commGateway = new CommentaireGateway();
+		$commGateway->supprAllComm($idSujet);
+		$articleGateway->supprArticle($idSujet);
+	}
 }
 ?> 

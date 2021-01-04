@@ -46,6 +46,12 @@ Class ArticleGateway{
 			':id' => array($id, PDO::PARAM_STR)));
 		return $this->con->getResults()[0];
 	}
+
+	function supprArticle($idSujet){
+		$query = "DELETE FROM articles WHERE id=:idsujet";
+		$this->con->executequery($query, array(
+				':idsujet' => array($idSujet, PDO::PARAM_STR)));
+	}
 }
 
 ?>
