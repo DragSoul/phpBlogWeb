@@ -24,7 +24,7 @@ $vues['vueInscription']='vues/vueInscription.php';
 $vues['vuePrincipale']='vues/vuePrincipale.php';
 $vues['vueP']='vues/vueP.php';
 $vues['vueAjout']='vues/vueAjout.php';
-$vues['vueSujet']='vues/vueSujet.php';
+$vues['vueArticle']='vues/vueArticle.php';
 
 
 

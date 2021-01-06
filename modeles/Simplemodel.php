@@ -57,26 +57,23 @@ class Simplemodel{
 		}
 	}
 
-	function ajouterSujet($pseudo, $nom, $contenu){
+	function ajouterArticle($pseudo, $nom, $contenu){
 		$articleGateway = new ArticleGateway();
-		$commentGateway = new CommentaireGateway();
 		$membreGateway = new MembreGateway();
 		Validation::sanitizeString($nom);
 		Validation::sanitizeString($contenu);
 		$id = $membreGateway->getId($pseudo);
-		$articleGateway->ajout($nom, $id['id']);
-		$idSujet = $articleGateway->getId($nom, $id['id']);
-		$commentGateway->ajout($id['id'], $contenu, $idSujet['id']);
+		$articleGateway->ajout($nom, $id['id'], $contenu);
 	}
 
-	function afficheSujet($topic){
+	function afficheCommentaire($topic){
 		$commGateway = new CommentaireGateway();
 		$membreGateway = new MembreGateway();
 		$tab = $commGateway->SelectAll($topic);
 		$tab2 = [];
 		foreach($tab as $t){
 			$proprietaire = $membreGateway->getPseudo($t->auteur);
-			$post = [$proprietaire[0], $t->contenu];
+			$post = [$proprietaire, $t->contenu, $t->date];
 			$tab2[] = $post;
 		}
 		return $tab2;
@@ -90,16 +87,21 @@ class Simplemodel{
 		$commGateway->ajout($id['id'], $desc, $nom);
 	}
 
-	function getNomSujet($id){
+	function getArticle($id){
 		$articleGateway = new ArticleGateway();
-		return $articleGateway->getNom($id);
+		return $articleGateway->getArticle($id);
 	}
 
-	function supprArticle($idSujet){
+	function supprArticle($idArticle){
 		$articleGateway = new ArticleGateway();
 		$commGateway = new CommentaireGateway();
-		$commGateway->supprAllComm($idSujet);
-		$articleGateway->supprArticle($idSujet);
+		$commGateway->supprAllComm($idArticle);
+		$articleGateway->supprArticle($idArticle);
+	}
+
+	function getNomAuteur($id){
+		$membreGateway = new MembreGateway();
+		return $membreGateway->getPseudo($id);
 	}
 }
 ?> 

@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <head>
     <meta charset='utf-8' />
-    <title>Mon super forum !</title>
+    <title>Mon forum pas fini !</title>
     
     <link rel="stylesheet" type="text/css" href="css/general.css" />
     <link rel="shortcut icon" href="images/favicon.ico" />
     <link href='http://fonts.googleapis.com/css?family=Karla' rel='stylesheet' type='text/css'>
 <head>
 <body>
- <h1>Bienvenue sur mon super forum !</h1>
+ <h1>Bienvenue sur mon super forum ! Il est presque fini. Et par "presque" j'entends "pas du tout" !</h1>
     
     <div id="Cforum">
     <?php
@@ -38,7 +38,7 @@
             <form method="post" id = "ajoutT">
                 <td><input name="article" type="submit" value="<?php echo $v->nom; ?>"></td>
                 <input name="topic" type="hidden" value="<?php echo $v->id; ?>">
-                <input type="hidden" name="action" value="afficheSujet">
+                <input type="hidden" name="action" value="afficheArticle">
             </form>
 
         <?php

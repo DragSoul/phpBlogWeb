@@ -33,7 +33,7 @@ Class MembreGateway{
 	public function getPseudo($id){
 		$query = "SELECT pseudo FROM membres WHERE id=:id";
 		$this->con->executequery($query, array(':id' => array($id, PDO::PARAM_STR)));
-		return $this->con->getResults()[0];
+		return $this->con->getResults()[0]['pseudo'];
 	}
 
 	public function getId($pseudo){

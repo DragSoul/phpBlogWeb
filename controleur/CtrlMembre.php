@@ -47,6 +47,23 @@ class CtrlMembre {
 		require_once($rep.$vues['vueP']);
 	}
 
+	function afficheArticle($topic){
+		global $rep,$vues;
+		$m = new Simplemodel();
+		$article = $m->getArticle($topic);
+		$t['nom'] = $article->nom;
+		$t['auteur'] = $m->getNomAuteur($article->auteur);
+		$t['date'] = $article->date;
+		$t['contenu'] = $article->contenu;
+		$dVue = array (
+			'article' => "",
+			'rep' => "",
+			);
+		$dVue['article'] = $t;
+		$dVue['rep'] = $m->afficheCommentaire($topic);
+		require_once($rep.$vues['vueArticle']);
+	}
+
 	function deconnexion(){
 		session_unset();
 		session_destroy();
@@ -59,15 +76,12 @@ class CtrlMembre {
 		$pseudo = $_SESSION['login'];
 		$nom = $topic;
 		$desc = $_POST['article'];
-		$model = new Simplemodel();
-		$model->repondre($pseudo, $nom, $desc);
-		$dVue = array (
-			'article' => "",
-			'rep' => "",
-			);
-		$dVue['article'] = $model->getNomSujet($topic);
-		$dVue['rep'] = $model->afficheSujet($topic);
-		require_once($rep.$vues['vueSujet']);
+		$m = new Simplemodel();
+		$m->repondre($pseudo, $nom, $desc);
+		$this->afficheArticle($topic);
+		require_once($rep.$vues['vueArticle']);
 	}
+
+	
 
 }

@@ -11,8 +11,8 @@
 <?php
 if (isset($dVue))
 {?>
-<a href="vueP.php">retour</a> <!--                      RETOUR                            -->
- <h1><?php echo $dVue['article'][0];?></h1>
+
+ <h1><?php echo $dVue['article']['nom'];?></h1>
     <div id="Cforum">
     <?php
         if(isset($_SESSION['role'])){
@@ -35,31 +35,45 @@ if (isset($dVue))
             </form>
         <?php
         }
+        ?>
+
+        <article class="article">
+            <p><?php echo $dVue['article']['contenu'];?></p>
+            <aside>
+                <h4><?php echo $dVue['article']['auteur'];?></h4>
+                <p><?php echo $dVue['article']['date'];?></p>
+            </aside>
+        </article>
+
+
+        <?php
+
+        if(isset($_SESSION['role'])){
+        ?>
+            <form method="post">
+                <textarea name="article" placeholder="insérer commentaire..." required></textarea><br>
+                <input type="hidden" name="action" value="repondre">
+                <input type="hidden" name="topic" value="<?php echo $_REQUEST['topic'];?>">
+                <input type="submit" value="envoyer" />
+                <?php 
+                if(isset($erreur)){
+                    echo $erreur;
+                }
+                ?>
+            </form >   
+        <?php
+        }
+
         foreach($dVue['rep'] as $v){
             ?>
             <div class="post">
-                <h3><?php echo $v[0];?></h3>
+                <h5><?php echo $v[2];?></h5>
+                <h2><?php echo $v[0];?></h2>
                 <p><?php echo $v[1];?></p>
             </div>
 
 
-            <?php 
-            if(isset($_SESSION['role'])){
-            ?>
-                <form method="post">
-                    <textarea name="article" placeholder="Contenu du sujet..."></textarea><br>
-                    <input type="hidden" name="action" value="repondre">
-                    <input type="hidden" name="topic" value="<?php echo $_REQUEST['topic'];?>">
-                    <input type="submit" value="envoyer" />
-                    <?php 
-                    if(isset($erreur)){
-                        echo $erreur;
-                    }
-                    ?>
-                </form >   
-            <?php
-            }
-            
+            <?php    
         }
         ?>
         

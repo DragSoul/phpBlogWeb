@@ -32,8 +32,8 @@ class CtrlUser {
 					$this->ReinitIn();
 					break;
 
-				case "afficheSujet":
-					$this->afficheSujet($_REQUEST['topic']);
+				case "afficheArticle":
+					$this->afficheArticle($_REQUEST['topic']);
 					break;
 
 				default:
@@ -114,16 +114,21 @@ class CtrlUser {
 
 	}
 
-	function afficheSujet($topic){
+	function afficheArticle($topic){
 		global $rep,$vues;
 		$m = new Simplemodel();
+		$article = $m->getArticle($topic);
+		$t['nom'] = $article->nom;
+		$t['auteur'] = $m->getNomAuteur($article->auteur);
+		$t['date'] = $article->date;
+		$t['contenu'] = $article->contenu;
 		$dVue = array (
 			'article' => "",
 			'rep' => "",
 			);
-		$dVue['article'] = $m->getNomSujet($topic);
-		$dVue['rep'] = $m->afficheSujet($topic);		
-		require_once($rep.$vues['vueSujet']);
+		$dVue['article'] = $t;
+		$dVue['rep'] = $m->afficheCommentaire($topic);
+		require_once($rep.$vues['vueArticle']);
 	}
 }
 

@@ -11,7 +11,6 @@ class FrontCtrl {
 			$a = Simplemodel::IsMembre();
 			if(isset($_REQUEST['action'])){
 				$action=$_REQUEST['action'];
-				echo $action;              ////////////////////to delete
 			}
 			else{
 				$action = NULL;

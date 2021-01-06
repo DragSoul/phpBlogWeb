@@ -68,13 +68,13 @@ class CtrlAdmin {
 		$nom=$_POST['name'];
 		$desc=$_POST['article'];
 		$model = new Simplemodel();
-		$model->ajouterSujet($pseudo, $nom, $desc);
+		$model->ajouterArticle($pseudo, $nom, $desc);
 		$this->afficheForum();
 	}
 
-    function supprArticle($idSujet){
+    function supprArticle($idArticle){
         $model = new Simplemodel();
-		$model->supprArticle($idSujet);
+		$model->supprArticle($idArticle);
 		$this->afficheForum();
     }
 }

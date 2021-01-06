@@ -15,7 +15,7 @@ if (isset($dVue))
 {?>
 
 <body>
-	<h1>Ajouter un sujet</h1>
+	<h1>Ajouter un article</h1>
     
 	<div id="Cforum">
 		<?php 
@@ -30,10 +30,10 @@ if (isset($dVue))
 		}
 		?>
 		<form method="post" id="newPost">
-			<br><input type="text" name="name" placeholder="Nom du sujet..." required/><br>
-			<textarea name="article" placeholder="Contenu du sujet..."></textarea><br>
+			<br><input type="text" name="name" placeholder="Nom de l'article..." required/><br>
+			<textarea name="article" placeholder="Contenu de l'article..."></textarea><br>
 			<input type="hidden" name="action" value="confirmeAjout">
-			<input type="submit" value="Ajouter le sujet" />
+			<input type="submit" value="Ajouter l'article" />
 			<?php 
 			if(isset($erreur)){
 				echo $erreur;

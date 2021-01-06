@@ -27,17 +27,17 @@ Class CommentaireGateway{
 	}
 
 	function ajout($auteur, $contenu, $idarticle){
-		$query = "INSERT INTO commentaires(auteur,contenu,idarticle) VALUES(:auteur, :contenu, :idarticle)";
+		$query = "INSERT INTO commentaires(auteur, contenu, idarticle) VALUES(:auteur, :contenu, :idarticle)";
 		$this->con->executequery($query, array(
 				':auteur' => array($auteur, PDO::PARAM_STR),
 				':contenu' => array($contenu, PDO::PARAM_STR), 
 				':idarticle' => array($idarticle, PDO::PARAM_STR)));
 	}
 
-	function supprAllComm($idSujet){
-		$query = "DELETE FROM commentaires WHERE idarticle=:idSujet";
+	function supprAllComm($idArticle){
+		$query = "DELETE FROM commentaires WHERE idarticle=:idArticle";
 		$this->con->executequery($query, array(
-				':idSujet' => array($idSujet, PDO::PARAM_STR)));
+				':idArticle' => array($idArticle, PDO::PARAM_STR)));
 	}
 }
 
